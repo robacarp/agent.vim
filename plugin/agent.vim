@@ -33,19 +33,14 @@ augroup agent_vim
 
   command! -nargs=1 ClaudeSetModel call agent#set_claude_model(<q-args>)
   command! -nargs=1 ClaudeSetApiKey call agent#set_claude_api_key(<q-args>)
-  nnoremap <silent> <Plug>(claude-ask) :ClaudeAsk<CR>
-  vnoremap <silent> <Plug>(claude-ask) :ClaudeAsk<CR>
-
-  command! -range AskAgentRange <line1>,<line2>call agent#send_code_with_prompt()
-  command! AskAgent call agent#send_buffer_with_prompt()
-  nnoremap <silent> <Plug>(ask-agent-question) :AskAgent<CR>
-  vnoremap <silent> <Plug>(ask-agent-question) :AskAgentRange<CR>
+  command! -range Ai <line1>,<line2>call agent#send_selection_with_prompt()
+  " command! Air call agent#send_buffer_with_prompt()
+  " nnoremap <silent> <Plug>(ask-agent-question) :AskAgent<CR>
+  " vnoremap <silent> <Plug>(ask-agent-question) :AskAgentRange<CR>
 
   " Default mappings for the new function if no_mappings is not set
   if !exists('g:agent_vim_no_mappings')
-    nmap <Leader>cq <Plug>(ask-agent-question)
-    vmap <Leader>cq <Plug>(ask-agent-question)
-    nmap <Leader>ca <Plug>(claude-ask)
-    vmap <Leader>ca <Plug>(claude-ask)
+    nmap <Leader>cq :Ai<CR>
+    vmap <Leader>cq :Ai<CR>
   endif
 augroup END
